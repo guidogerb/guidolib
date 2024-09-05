@@ -50,6 +50,7 @@ class MidiMapper : public TimeUnwrap
 		void		TempoChge (const ARMusicalObject * ev);
 		void		IntensChge (const ARMusicalObject * ev);
 		void		TiedNote (MidiEvPtr note);
+		void		Instr (const ARMusicalObject * ev);
 
 	protected:
 		virtual void		Event (const ARMusicalObject * ev, EventType type);

@@ -17,6 +17,8 @@
 #include "ARInstrument.h"
 #include "TagParameterStrings.h"
 #include "TagParameterString.h"
+#include "TagParameterInt.h"
+#include "TimeUnwrap.h"
 
 using namespace std;
 
@@ -36,6 +38,12 @@ void ARInstrument::setTagParameters (const TagParameterMap& params)
 	if (autopos)
 		fAutoPos = getParameter<TagParameterString>(kAutoposStr, true)->getBool();
 	fRepeat	= getParameter<TagParameterString>(kRepeatStr, true)->getBool();
+	fMidiInstr	= getParameter<TagParameterInt>(kMIDIInstrStr, true)->getValue();
+}
+
+void ARInstrument::browse(TimeUnwrap& mapper) const
+{
+	mapper.AtPos (this, TimeUnwrap::kInstr);
 }
 
 

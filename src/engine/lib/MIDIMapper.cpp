@@ -25,6 +25,7 @@
 #include "ARMusicalVoiceState.h"
 #include "ARNote.h"
 #include "ARIntens.h"
+#include "ARInstrument.h"
 #include "ARTempo.h"
 #include "ARTie.h"
 
@@ -100,6 +101,19 @@ void MidiMapper::IntensChge(const ARMusicalObject * ev)
 }
 
 //------------------------------------------------------------------------------
+void MidiMapper::Instr(const ARMusicalObject * ev)
+{
+	const ARInstrument* instr = dynamic_cast<const ARInstrument*>(ev);
+	if (instr && instr->midi() >= 0) {
+		MidiEvPtr pc = fMidi->NewEv(typeProgChange);
+		Date(pc)  = Ticks (fUPosition);
+		Data(pc)[0] = instr->midi();
+		Chan(pc) = fChan;
+		fMidi->AddSeq (fSeq, pc);
+	}
+}
+
+//------------------------------------------------------------------------------
 void MidiMapper::Event(const ARMusicalObject * ev, EventType type)
 {
 	switch (type) {
@@ -123,6 +137,8 @@ void MidiMapper::Event(const ARMusicalObject * ev, EventType type)
 		case kTie:		fFlags |= hasTie;
 			break;
 		case kNoTie:	fTiedNotes.clear();
+			break;
+		case kInstr:	Instr(ev);
 			break;
 		default:
 			break;

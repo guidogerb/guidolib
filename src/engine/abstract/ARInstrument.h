@@ -35,11 +35,14 @@
 @param:name:string:the instrument name:*none*:false
 @param:transp:string:a transposition string:*none*:true
 @param:autopos:boolean:automatic position control:off:true
+@param:repeat:boolean:allows to display on each system:off:true
+@param:MIDI:int:MIDI instrument number:-1:true
 @fontparams:
 @paramdesc
 - **name** is the instrument name (e.g. "Violin I")
 - **transp** is provided for transposing instruments. For example, with a Trumpet in B flat, you should set **transp** to "B&". When *transp* is set, a transposing key is automatically inserted and the notes are automatically transposed to the corresponding interval.
 - **autopos**: when "on", put the instrument string centered to the left of the corresponding staff. The default position if on top, left of the staff.
+- **repeat**: when "on", the instrument string is repeated on each system.
 
 See the [Articulations](@EXAMPLES/articulations/) example.<br />
 See the [Mozart](@EXAMPLES/mozart581/) example.<br />
@@ -63,17 +66,20 @@ class ARInstrument : public ARFontAble
 		virtual const char*	getTagName() const		{ return "ARInstrument"; };
 		virtual std::string getGMNName() const		{ return "\\instrument"; };
 		virtual bool IsStateTag() const				{ return true; }
+		virtual void browse(TimeUnwrap& mapper) const;
 
 		const std::string& getName() const			{ return fName; }
 		const std::string& getTransp() const		{ return fTransp; }
 		bool			   autoPos() const			{ return fAutoPos; }
 		bool			   repeat() const			{ return fRepeat; }
+		int			   	   midi() const				{ return fMidiInstr; }
 
 	private:
 		std::string fName;
 		std::string fTransp;
 		bool		fAutoPos;
 		bool		fRepeat = false;		// to display the instrument every new system
+		int			fMidiInstr = -1;
 };
 
 #endif

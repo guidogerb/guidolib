@@ -53,7 +53,7 @@ class TimeUnwrap
 						kDaCapo, kDaCapoAlFine, kDaCoda,
 						kDalSegno, kDalSegnoAlFine, kVolta, kTempo,
 						kFermata, kAccent, kSlur, kStaccato, kTenuto,
-						kMarcato, kIntens, kTie, kGlissando, kChordComma, kNoTie } EventType;
+						kMarcato, kIntens, kTie, kGlissando, kChordComma, kNoTie, kInstr } EventType;
 
 				 TimeUnwrap(ARMusicalVoice* voice) : fVoice(voice),
 												fStartPos(0), fFinePos(0), fCodaPos(0),
