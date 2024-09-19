@@ -31,6 +31,3 @@ jobs:
 
       - name: Build Guidolib
         run: make -C build basic
-
-      - name: Build Guidolib Qt
-        run: make -C build Qt
