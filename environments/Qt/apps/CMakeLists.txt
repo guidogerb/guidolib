@@ -26,6 +26,10 @@ else()
 	set (GUIDO_LIBRARY "-L${GUIDODIR}/build/lib -lGUIDOEngine")
 endif()
 
+if (APPLE AND NOT IOS)
+	set(CMAKE_OSX_ARCHITECTURES x86_64)
+endif()
+
 set (CMAKE_BUILD_RPATH "${GUIDODIR}/build/lib")
 set (CMAKE_SKIP_BUILD_RPATH FALSE)
 

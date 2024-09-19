@@ -85,6 +85,11 @@ if (WIN32)
 elseif(APPLE)
 	set(EXE MACOSX_BUNDLE)
 endif()
+
+if (APPLE AND NOT IOS)
+	set(CMAKE_OSX_ARCHITECTURES x86_64)
+endif()
+
 set (VSRC 	GuidoQtFontViewer/main.cpp GuidoQtFontViewer/QFontDisplayer.cpp GuidoQtFontViewer/QFontDisplayer.h )
 add_executable(${fontviewer} ${EXE} ${VSRC} )
 target_include_directories (${fontviewer} PRIVATE ${QTINCDIRS})
