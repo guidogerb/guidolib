@@ -47,6 +47,10 @@ if (UNIX AND NOT APPLE)
 	set(CMAKE_CXX_FLAGS -fPIC)
 endif()
 
+if (APPLE AND NOT IOS)
+	set(CMAKE_OSX_ARCHITECTURES x86_64)
+endif()
+
 set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 #######################################
